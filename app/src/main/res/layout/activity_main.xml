@@ -6,11 +6,17 @@
 
 <!--    data-->
     <data>
+        <import type="androidx.lifecycle.LiveData"/>
+        <import type="com.example.moviesearcher.model.Movie"/>
+        
         <variable
             name="activity"
             type="com.example.moviesearcher.MainActivity" />
-    </data>
+        <variable
+            name="movieModel"
+            type="com.example.moviesearcher.viewmodel.MovieViewModel" />
 
+    </data>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -53,13 +59,14 @@
 
             </Button>
 
-        </LinearLayout>
+    </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="14">
-
+            android:layout_weight="14"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:item="@{movieModel.movieList}">
         </androidx.recyclerview.widget.RecyclerView>
 
     </LinearLayout>

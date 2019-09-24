@@ -1,5 +1,12 @@
 package com.example.moviesearcher.model;
 
+import android.widget.ImageView;
+
+import androidx.databinding.BindingAdapter;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.example.moviesearcher.R;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -93,4 +100,13 @@ public class Movie {
         this.userRating = userRating;
     }
 
+    @BindingAdapter({"imageUrl"})
+    public static void loadImage(ImageView imageView, String imageUrl){
+        Glide.with(imageView.getContext())
+                .setDefaultRequestOptions(new RequestOptions()
+                    .circleCrop())
+                .load(imageUrl)
+                .placeholder(R.drawable.ic_launcher_background)
+                .into(imageView);
+    }
 }
