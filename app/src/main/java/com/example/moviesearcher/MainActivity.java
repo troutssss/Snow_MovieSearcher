@@ -22,6 +22,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -98,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
         model.getAllMovie("asd").observe(this, new Observer<List<Movie>>() {
             @Override
             public void onChanged(List<Movie> movies) {
-
+                movieDataAdapter.setMovieList((ArrayList<Movie>) movies);
             }
         });
     }
