@@ -2,7 +2,6 @@
     <string name="app_name">MovieSearcher</string>
     <string name="action_settings">Settings</string>
 
-    <string name="baseUrl">https://openapi.naver.com/v1/search/movie.json</string>
     <string name="ClientId">sqOgulja5DVH34EJmeL7</string>
     <string name="ClientSecret">vMzFd2QCXt</string>
 </resources>

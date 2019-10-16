@@ -2,7 +2,7 @@ package com.example.moviesearcher;
 
 import android.os.Bundle;
 
-import com.example.moviesearcher.Util.RetrofitAPI;
+import com.example.moviesearcher.Util.MovieDataService;
 import com.example.moviesearcher.databinding.ActivityMainBinding;
 import com.example.moviesearcher.model.Movie;
 import com.example.moviesearcher.model.SearchMovie;
@@ -23,14 +23,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding binding;
     private MovieViewModel model;
     private Retrofit retrofit;
-    private RetrofitAPI retrofitAPI;
+    private MovieDataService movieDataService;
     private Call<SearchMovie> searchMovie;
 
     @Override
@@ -39,9 +38,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-        binding.setActivity(this);
 
         model = ViewModelProviders.of(this).get(MovieViewModel.class);
 
@@ -54,6 +50,9 @@ public class MainActivity extends AppCompatActivity {
 
         model.getMovieList().observe(this, movieObserver);
 
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        binding.setActivity(this);
+        binding.setMovieModel(model);
 
     }
 
@@ -79,23 +78,14 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void initRetrofit(){
-        retrofit = new Retrofit.Builder()
-                .baseUrl(getString(R.string.baseUrl))
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        retrofitAPI = retrofit.create(RetrofitAPI.class);
-    }
-
     private void searchMoive(){
 
     }
 
     public void onSearchButtonClicked(View v){
         Toast.makeText(this, "Search Btn Clicked", Toast.LENGTH_SHORT).show();
-        searchMovie = retrofitAPI.getSearchMovie();
-        searchMovie.enqueue();
+        //searchMovie = movieDataService.getMovies();
+        //searchMovie.enqueue();
     }
 
     private Callback<SearchMovie> retrofitCallback = new Callback<SearchMovie>() {
@@ -113,5 +103,5 @@ public class MainActivity extends AppCompatActivity {
         public void onFailure(Call<SearchMovie> call, Throwable t) {
 
         }
-    }
+    };
 }

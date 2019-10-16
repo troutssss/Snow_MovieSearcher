@@ -100,7 +100,7 @@ public class Movie {
         this.userRating = userRating;
     }
 
-    @BindingAdapter({"imageUrl"})
+    @BindingAdapter({"imgUrl"})
     public static void loadImage(ImageView imageView, String imageUrl){
         Glide.with(imageView.getContext())
                 .setDefaultRequestOptions(new RequestOptions()
