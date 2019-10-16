@@ -1,7 +1,6 @@
 package com.example.moviesearcher.adaptor;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -10,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.moviesearcher.R;
 import com.example.moviesearcher.databinding.ItemMovieBinding;
-import com.example.moviesearcher.model.Movie;
+import com.example.moviesearcher.db.model.Movie;
 
 import java.util.ArrayList;
 

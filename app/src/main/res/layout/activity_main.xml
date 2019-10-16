@@ -7,7 +7,7 @@
 <!--    data-->
     <data>
         <import type="androidx.lifecycle.LiveData"/>
-        <import type="com.example.moviesearcher.model.Movie"/>
+        <import type="com.example.moviesearcher.db.model.Movie"/>
         
         <variable
             name="activity"
@@ -45,6 +45,7 @@
             android:orientation="horizontal">
 
             <EditText
+                android:id="@+id/et_movie_name"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="8">
@@ -62,12 +63,13 @@
     </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
+            android:id="@+id/rv_movieList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="14"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:item="@{movieModel.movieList}">
+            >
+<!--            app:item="@{movieModel.movieList}"-->
         </androidx.recyclerview.widget.RecyclerView>
 
     </LinearLayout>

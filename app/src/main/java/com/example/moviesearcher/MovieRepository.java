@@ -1,13 +1,16 @@
 package com.example.moviesearcher;
 
-import android.widget.Toast;
+import android.app.Application;
+import android.os.AsyncTask;
 
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.moviesearcher.Util.RetrofitAPI;
 import com.example.moviesearcher.Util.RetrofitClient;
-import com.example.moviesearcher.model.Movie;
-import com.example.moviesearcher.model.SearchMovie;
+import com.example.moviesearcher.db.MovieRoomDatabase;
+import com.example.moviesearcher.db.dao.MovieDao;
+import com.example.moviesearcher.db.model.Movie;
+import com.example.moviesearcher.db.model.SearchMovie;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,9 +23,16 @@ public class MovieRepository {
     private static final String TAG = "MovieRepository";
     private ArrayList<Movie> movieList = new ArrayList<>();
     private MutableLiveData<List<Movie>> mutableLiveData = new MutableLiveData<>();
+    private MovieDao movieDao;
 
-    public MovieRepository(){}
+    public MovieRepository(Application application){
+        MovieRoomDatabase db = MovieRoomDatabase.geMovieDatabase(application);
+        movieDao = db.movieDao();
+        //mutable vs livedata
+        // mutableLiveData = movieDao.getAllMovies();
+    }
 
+    //from naver api
     public MutableLiveData<List<Movie>> getMutableLiveData(String movieName){
         final RetrofitAPI retrofit = RetrofitClient.getRetorofitService();
 
@@ -51,4 +61,21 @@ public class MovieRepository {
         return mutableLiveData;
     }
 
+    public void insert(Movie movie){
+        new insertAsyncTask(movieDao).execute(movie);
+    }
+
+    private static class insertAsyncTask extends AsyncTask<Movie, Void, Void>{
+        private MovieDao asyncTaskDao;
+
+        insertAsyncTask(MovieDao dao){
+            asyncTaskDao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(final Movie... movies) {
+            asyncTaskDao.insert(movies[0]);
+            return null;
+        }
+    }
 }

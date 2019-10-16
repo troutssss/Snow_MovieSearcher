@@ -1,4 +1,4 @@
-package com.example.moviesearcher.model;
+package com.example.moviesearcher.db.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

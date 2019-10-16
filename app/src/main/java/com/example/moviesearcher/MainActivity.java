@@ -2,11 +2,9 @@ package com.example.moviesearcher;
 
 import android.os.Bundle;
 
-import com.example.moviesearcher.Util.RetrofitAPI;
 import com.example.moviesearcher.adaptor.MovieDataAdapter;
 import com.example.moviesearcher.databinding.ActivityMainBinding;
-import com.example.moviesearcher.model.Movie;
-import com.example.moviesearcher.model.SearchMovie;
+import com.example.moviesearcher.db.model.Movie;
 import com.example.moviesearcher.viewmodel.MovieViewModel;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,12 +22,6 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -49,13 +41,23 @@ public class MainActivity extends AppCompatActivity {
         binding.setActivity(this);
 
         //bind RecyclerView
-        RecyclerView recyclerView = binding.recyclerView;
+        RecyclerView recyclerView = binding.rvMovieList;
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
 
         model = ViewModelProviders.of(this).get(MovieViewModel.class);
         movieDataAdapter = new MovieDataAdapter();
         recyclerView.setAdapter(movieDataAdapter);
+
+        String searchMovie = binding.etMovieName.getText().toString();
+        Toast.makeText(this, "Search Btn Clicked", Toast.LENGTH_SHORT).show();
+
+        model.getAllMovie("asd").observe(this, new Observer<List<Movie>>() {
+            @Override
+            public void onChanged(List<Movie> movies) {
+                movieDataAdapter.setMovieList((ArrayList<Movie>) movies);
+            }
+        });
 
 //        final Observer<List<Movie>> movieObserver = new Observer<List<Movie>>() {
 //            @Override
@@ -96,12 +98,7 @@ public class MainActivity extends AppCompatActivity {
     public void onSearchButtonClicked(View v){
         Toast.makeText(this, "Search Btn Clicked", Toast.LENGTH_SHORT).show();
 
-        model.getAllMovie("asd").observe(this, new Observer<List<Movie>>() {
-            @Override
-            public void onChanged(List<Movie> movies) {
-                movieDataAdapter.setMovieList((ArrayList<Movie>) movies);
-            }
-        });
+
     }
 
 }
