@@ -2,11 +2,7 @@ package com.example.moviesearcher;
 
 import android.os.Bundle;
 
-<<<<<<< HEAD
-import com.example.moviesearcher.Util.MovieDataService;
-=======
 import com.example.moviesearcher.adaptor.MovieDataAdapter;
->>>>>>> 97201182f06a401f5fd0c0e420db681a12ca5312
 import com.example.moviesearcher.databinding.ActivityMainBinding;
 import com.example.moviesearcher.db.model.Movie;
 import com.example.moviesearcher.viewmodel.MovieViewModel;
@@ -24,28 +20,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-<<<<<<< HEAD
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-=======
 import java.util.ArrayList;
 import java.util.List;
->>>>>>> 97201182f06a401f5fd0c0e420db681a12ca5312
 
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
     private MovieViewModel model;
-<<<<<<< HEAD
-    private Retrofit retrofit;
-    private MovieDataService movieDataService;
-    private Call<SearchMovie> searchMovie;
-=======
     private MovieDataAdapter movieDataAdapter;
 
->>>>>>> 97201182f06a401f5fd0c0e420db681a12ca5312
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +37,6 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-<<<<<<< HEAD
-=======
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         binding.setActivity(this);
 
@@ -64,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
 
->>>>>>> 97201182f06a401f5fd0c0e420db681a12ca5312
         model = ViewModelProviders.of(this).get(MovieViewModel.class);
         movieDataAdapter = new MovieDataAdapter();
         recyclerView.setAdapter(movieDataAdapter);
@@ -79,18 +59,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-<<<<<<< HEAD
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-        binding.setActivity(this);
-        binding.setMovieModel(model);
-=======
 //        final Observer<List<Movie>> movieObserver = new Observer<List<Movie>>() {
 //            @Override
 //            public void onChanged(Movie movie) {
 //                //UI update!
 //            }
 //        };
->>>>>>> 97201182f06a401f5fd0c0e420db681a12ca5312
 
     }
 
@@ -116,32 +90,15 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 97201182f06a401f5fd0c0e420db681a12ca5312
     private void searchMoive(){
 
     }
 
     public void onSearchButtonClicked(View v){
         Toast.makeText(this, "Search Btn Clicked", Toast.LENGTH_SHORT).show();
-<<<<<<< HEAD
-        //searchMovie = movieDataService.getMovies();
-        //searchMovie.enqueue();
-    }
-=======
->>>>>>> 97201182f06a401f5fd0c0e420db681a12ca5312
 
 
-<<<<<<< HEAD
-        @Override
-        public void onFailure(Call<SearchMovie> call, Throwable t) {
-
-        }
-    };
-=======
     }
 
->>>>>>> 97201182f06a401f5fd0c0e420db681a12ca5312
 }

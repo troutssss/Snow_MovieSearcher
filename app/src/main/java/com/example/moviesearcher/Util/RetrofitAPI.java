@@ -6,8 +6,8 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 
-public interface MovieDataService {
+public interface RetrofitAPI {
     @GET("query/{movieName}")
-    Call<SearchMovie> getMovies(@Path("movieName") String movieName);
+    Call<SearchMovie> getSearchMovie(@Path("movieName") String movieName);
 
 }

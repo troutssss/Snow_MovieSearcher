@@ -4,11 +4,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-<!--    data-->
+    <!--    data-->
     <data>
         <import type="androidx.lifecycle.LiveData"/>
         <import type="com.example.moviesearcher.db.model.Movie"/>
-        
+
         <variable
             name="activity"
             type="com.example.moviesearcher.MainActivity" />
@@ -45,11 +45,7 @@
             android:orientation="horizontal">
 
             <EditText
-<<<<<<< HEAD
-                android:id="@+id/editText_movieName"
-=======
                 android:id="@+id/et_movie_name"
->>>>>>> 97201182f06a401f5fd0c0e420db681a12ca5312
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="8">
@@ -64,22 +60,18 @@
 
             </Button>
 
-    </LinearLayout>
+        </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_movieList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="14"
-<<<<<<< HEAD
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
-=======
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             >
-<!--            app:item="@{movieModel.movieList}"-->
->>>>>>> 97201182f06a401f5fd0c0e420db681a12ca5312
+            <!--            app:item="@{movieModel.movieList}"-->
         </androidx.recyclerview.widget.RecyclerView>
 
     </LinearLayout>
-</layout>
 
+</layout>
