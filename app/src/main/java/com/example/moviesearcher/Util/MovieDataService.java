@@ -1,6 +1,6 @@
 package com.example.moviesearcher.Util;
 
-import com.example.moviesearcher.model.SearchMovie;
+import com.example.moviesearcher.db.model.SearchMovie;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

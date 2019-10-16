@@ -31,6 +31,10 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-livedata:2.1.0'
     implementation 'androidx.lifecycle:lifecycle-common:2.1.0'
 
+    //room
+    implementation "androidx.room:room-runtime:2.2.0"
+    annotationProcessor "androidx.room:room-compiler:2.2.0"
+
     //retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.4.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
