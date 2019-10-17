@@ -23,7 +23,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MovieDataAdapter.MovieDataAdaptorListener {
 
     private ActivityMainBinding binding;
     private MovieViewModel model;
@@ -46,18 +46,9 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
 
         model = ViewModelProviders.of(this).get(MovieViewModel.class);
-        movieDataAdapter = new MovieDataAdapter();
+        movieDataAdapter = new MovieDataAdapter(this);
         recyclerView.setAdapter(movieDataAdapter);
 
-        String searchMovie = binding.etMovieName.getText().toString();
-        Toast.makeText(this, "Search Btn Clicked", Toast.LENGTH_SHORT).show();
-
-        model.getAllMovie("asd").observe(this, new Observer<List<Movie>>() {
-            @Override
-            public void onChanged(List<Movie> movies) {
-                movieDataAdapter.setMovieList((ArrayList<Movie>) movies);
-            }
-        });
 
 //        final Observer<List<Movie>> movieObserver = new Observer<List<Movie>>() {
 //            @Override
@@ -96,9 +87,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onSearchButtonClicked(View v){
-        Toast.makeText(this, "Search Btn Clicked", Toast.LENGTH_SHORT).show();
 
+        String searchMovie = binding.etMovieName.getText().toString();
+        Toast.makeText(this, "searchTitle : "+searchMovie, Toast.LENGTH_SHORT).show();
+        model.getAllMovie(searchMovie).observe(this, new Observer<List<Movie>>() {
+            @Override
+            public void onChanged(List<Movie> movies) {
+                movieDataAdapter.setMovieList((ArrayList<Movie>) movies);
+            }
+        });
 
     }
 
+    @Override
+    public void onItemClicked(Movie movie) {
+        Toast.makeText(this, "title : "+movie.getTitle() + ",link : "+movie.getLink(), Toast.LENGTH_SHORT).show();
+    }
 }

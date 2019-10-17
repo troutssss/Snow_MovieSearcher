@@ -120,9 +120,18 @@ public class Movie {
     public static void loadImage(ImageView imageView, String imageUrl){
         Glide.with(imageView.getContext())
                 .setDefaultRequestOptions(new RequestOptions()
-                    .circleCrop())
+                    .fitCenter())
                 .load(imageUrl)
+                .override(200,600)
                 .placeholder(R.drawable.ic_launcher_background)
                 .into(imageView);
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
