@@ -1,6 +1,7 @@
 package com.example.moviesearcher.adaptor;
 
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -16,6 +17,11 @@ import java.util.ArrayList;
 public class MovieDataAdapter extends RecyclerView.Adapter<MovieDataAdapter.MovieViewHolder> {
 
     private ArrayList<Movie> movieList;
+    private MovieDataAdaptorListener listener;
+
+    public MovieDataAdapter(MovieDataAdaptorListener listener){
+        this.listener = listener;
+    }
 
     @NonNull
     @Override
@@ -27,9 +33,18 @@ public class MovieDataAdapter extends RecyclerView.Adapter<MovieDataAdapter.Movi
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MovieViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MovieViewHolder holder, final int position) {
         Movie currentMovie = movieList.get((position));
         holder.itemMovieBinding.setMovie(currentMovie);
+        holder.itemMovieBinding.cvMovieItem.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                if(listener != null){
+                    listener.onItemClicked(movieList.get(position));
+                }
+            }
+        });
     }
 
     @Override
@@ -54,7 +69,12 @@ public class MovieDataAdapter extends RecyclerView.Adapter<MovieDataAdapter.Movi
             super(itemMovieBinding.getRoot());
 
             this.itemMovieBinding = itemMovieBinding;
+
         }
+    }
+
+    public interface MovieDataAdaptorListener{
+        void onItemClicked(Movie movie);
     }
 }
 
