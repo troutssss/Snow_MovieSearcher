@@ -4,11 +4,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-<!--    data-->
+    <!--    data-->
     <data>
         <import type="androidx.lifecycle.LiveData"/>
         <import type="com.example.moviesearcher.db.model.Movie"/>
-        
+
         <variable
             name="activity"
             type="com.example.moviesearcher.MainActivity" />
@@ -64,7 +64,7 @@
 
             </Button>
 
-    </LinearLayout>
+        </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_movieList"
@@ -73,10 +73,9 @@
             android:layout_weight="14"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             >
-<!--            app:item="@{movieModel.movieList}"-->
+            <!--            app:item="@{movieModel.movieList}"-->
         </androidx.recyclerview.widget.RecyclerView>
 
     </LinearLayout>
 
 </layout>
-
