@@ -28,17 +28,24 @@ public class MovieRepository {
     private MutableLiveData<List<Movie>> mutableLiveData = new MutableLiveData<>();
     private MovieDao movieDao;
     private Application application;
+    private CustomCallback callback;
 
-    public MovieRepository(Application application){
+    public MovieRepository(Application application, CustomCallback callback){
         this.application = application;
+        this.callback = callback;
         MovieRoomDatabase db = MovieRoomDatabase.geMovieDatabase(application);
         movieDao = db.movieDao();
         //mutable vs livedata
         // mutableLiveData = movieDao.getAllMovies();
     }
 
+    public MutableLiveData<List<Movie>> getMutableLiveData(){
+        return mutableLiveData;
+    }
+
+
     //from naver api
-    public MutableLiveData<List<Movie>> getMutableLiveData(String movieName){
+    public void searchMovieList(String movieName){
         final RetrofitAPI retrofit = RetrofitClient.getRetrofitService();
 
         Call<SearchMovie> call = retrofit.getSearchMovie(movieName);
@@ -53,7 +60,8 @@ public class MovieRepository {
                     SearchMovie searchMovie = response.body();
                     movieList = (ArrayList<Movie>)searchMovie.getItems();
                     Log.v("API success", "movieList(items) : "+ new Gson().toJson(movieList));
-                    mutableLiveData.setValue(movieList);
+                    callback.callbackMethod(movieList);
+                    //mutableLiveData.setValue(movieList);
                 }
                 else{
                     Toast.makeText(application, "API fail code : "+response.code() , Toast.LENGTH_SHORT).show();
@@ -69,7 +77,6 @@ public class MovieRepository {
             }
         });
 
-        return mutableLiveData;
     }
 
     public void insert(Movie movie){

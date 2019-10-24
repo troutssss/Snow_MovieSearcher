@@ -15,6 +15,9 @@
         <variable
             name="movieModel"
             type="com.example.moviesearcher.viewmodel.MovieViewModel" />
+        <variable
+            name="movieTitle"
+            type="String" />
 
     </data>
 
@@ -45,10 +48,11 @@
             android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/et_movie_name"
+                android:id="@+id/et_movie_title"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="8">
+                android:layout_weight="8"
+                android:text="@={movieTitle}">
             </EditText>
 
             <Button

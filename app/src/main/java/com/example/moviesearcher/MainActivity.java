@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements MovieDataAdapter.
     private ActivityMainBinding binding;
     private MovieViewModel model;
     private MovieDataAdapter movieDataAdapter;
+    public String movieTitle;
 
 
     @Override
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements MovieDataAdapter.
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         binding.setActivity(this);
+        binding.setMovieTitle(movieTitle);
 
         //bind RecyclerView
         RecyclerView recyclerView = binding.rvMovieList;
@@ -49,13 +51,12 @@ public class MainActivity extends AppCompatActivity implements MovieDataAdapter.
         movieDataAdapter = new MovieDataAdapter(this);
         recyclerView.setAdapter(movieDataAdapter);
 
-
-//        final Observer<List<Movie>> movieObserver = new Observer<List<Movie>>() {
-//            @Override
-//            public void onChanged(Movie movie) {
-//                //UI update!
-//            }
-//        };
+        model.getAllMovie().observe(this, new Observer<List<Movie>>() {
+            @Override
+            public void onChanged(List<Movie> movies) {
+                movieDataAdapter.setMovieList((ArrayList<Movie>) movies);
+            }
+        });
 
     }
 
@@ -81,22 +82,9 @@ public class MainActivity extends AppCompatActivity implements MovieDataAdapter.
         return super.onOptionsItemSelected(item);
     }
 
-
-    private void searchMoive(){
-
-    }
-
     public void onSearchButtonClicked(View v){
-
-        String searchMovie = binding.etMovieName.getText().toString();
-        Toast.makeText(this, "searchTitle : "+searchMovie, Toast.LENGTH_SHORT).show();
-        model.getAllMovie(searchMovie).observe(this, new Observer<List<Movie>>() {
-            @Override
-            public void onChanged(List<Movie> movies) {
-                movieDataAdapter.setMovieList((ArrayList<Movie>) movies);
-            }
-        });
-
+        Toast.makeText(this, "searchTitle : "+movieTitle, Toast.LENGTH_SHORT).show();
+        model.searchMovieList(movieTitle);
     }
 
     @Override
